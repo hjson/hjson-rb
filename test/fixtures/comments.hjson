@@ -1,0 +1,7 @@
+{
+  # specify rate in requests/second
+  "rate": 1000
+
+  // prefer c-style comments?
+  /* feeling old fashioned? */
+}
