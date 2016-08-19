@@ -16,6 +16,7 @@ module Hjson
       rule(:escaped)      { |c| c == ?\\ }
       rule(:unicode)      { |c| c == ?u }
       rule(:escapee)      { |c| !!ESCAPEE[c] }
+      rule(:nothex)       { |c| ![(?0..?9),(?a..?f),(?A..?F)].include?(c) }
 
       declare :payload, ''
 
@@ -47,6 +48,9 @@ module Hjson
       def read_unicode
         uffff = 4.times.reduce(0) do |uffff, _|
           read
+          if nothex?
+            fail SyntaxError
+          end
           hex = char.to_i(16)
           break if hex.infinite?
           uffff * 16 + hex
