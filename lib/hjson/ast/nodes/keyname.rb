@@ -16,14 +16,14 @@ module Hjson
         until eos?
           if colon?
             fail SyntaxError if payload.empty?
-            if space.positive? && space != payload.length
+            if positive?(space) && space != payload.length
               buffer.pos = start + space
               fail SyntaxError
             end
             halt(payload)
           elsif char <= ' '
             fail SyntaxError if eos?
-            self.space = payload.length if space.negative?
+            self.space = payload.length if negative?(space)
           elsif punctuator?
             fail SyntaxError
           else
@@ -31,6 +31,16 @@ module Hjson
           end
           read
         end
+      end
+
+      private
+
+      def positive?(number)
+        number.respond_to?(:positive?) ? number.positive? : (number > 0)
+      end
+
+      def negative?(number)
+        number.respond_to?(:negative?) ? number.negative? : (number < 0)
       end
     end
   end
