@@ -1,5 +1,9 @@
 # Hjson, the Human JSON written in Ruby
 
+[![Build Status](https://img.shields.io/travis/hjson/hjson-rb.svg?style=flat-square)](http://travis-ci.org/hjson/hjson-rb)
+[![gem](https://img.shields.io/gem/v/hjson.svg?style=flat-square)](https://rubygems.org/gems/hjson)
+[![License](https://img.shields.io/github/license/hjson/hjson-rb.svg?style=flat-square)](https://github.com/hjson/hjson-rb/blob/master/LICENSE.txt)
+
 A configuration file format for humans. Relaxed syntax, fewer mistakes, more comments for Ruby.
 
 ## Installation
