@@ -9,13 +9,12 @@ module Hjson
         @names[type] ||= begin
           namespace  = name.split(/::/).slice(0..-2).join('::')
           const_name = parser_name(type, namespace)
-          Object.const_get(const_name) if Object.const_defined?(const_name)
+          AST.const_get(const_name) if AST.const_defined?(const_name)
         end
       end
 
       def self.parser_name(type, namespace)
-				type = type.to_s.split(?_).map(&:capitalize).join
-        "#{namespace}::#{type}"
+        type.to_s.split(?_).map(&:capitalize).join
       end
 
       def with_whitespaces
