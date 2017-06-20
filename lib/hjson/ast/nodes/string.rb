@@ -46,12 +46,12 @@ module Hjson
       end
 
       def read_unicode
-        uffff = 4.times.reduce(0) do |uffff, _|
+        uffff = 4.times.reduce(0) do |i, _|
           read
           fail SyntaxError unless hex?
           hex = char.to_i(16)
           break if hex.infinite?
-          uffff * 16 + hex
+          i * 16 + hex
         end
         uffff.chr(Encoding::UTF_8)
       end
