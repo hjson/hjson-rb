@@ -53,7 +53,7 @@ module Hjson
             case val
             when Proc   then instance_eval(&val)
             when Symbol then send(val)
-            when Fixnum then val
+            when Integer then val
             else val.dup
             end
           instance_variable_set(:"@#{var}", val)
