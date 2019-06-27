@@ -24,7 +24,10 @@ module Hjson
 
       parser do
         loop do
-          fail SyntaxError unless char
+          unless char
+            fail SyntaxError.new(self)
+          end
+
           if single_quote?
             self.triple += 1
             read
