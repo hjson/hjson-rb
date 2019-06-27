@@ -12,7 +12,7 @@ module Hjson
 
       parser do
         if punctuator?
-          fail SyntaxError, 'Any value does not expected %p' % char
+          fail SyntaxError.new(self, ('Any value does not expect %p' % char))
         end
       end
       parser do
