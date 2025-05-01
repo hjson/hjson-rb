@@ -23,9 +23,8 @@ module Hjson
         node(:whitespace)
       end
 
-      def node(type, *args, &block)
-        args.unshift(buffer)
-        Node[type].new(*args).parse
+      def node(type, *args, **options, &block)
+        Node[type].new(buffer, **options).parse
       end
     end
   end
