@@ -18,7 +18,7 @@ module Hjson
           end
         end
       end
-      parser { fail EndOfInputError }
+      parser { fail EndOfInputError.new(self) }
     end
   end
 end

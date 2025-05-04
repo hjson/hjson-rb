@@ -32,7 +32,7 @@ module Hjson
         if without_braces?
           halt(payload)
         else
-          fail EndOfInputError
+          fail EndOfInputError.new(self)
         end
       end
     end

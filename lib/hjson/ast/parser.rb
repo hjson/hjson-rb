@@ -45,6 +45,10 @@ module Hjson
         assign_declared_vars!
       end
 
+      def current_line_number
+        string[0..pos].count("\n") + 1
+      end
+
       private
 
       def assign_declared_vars!
@@ -62,8 +66,10 @@ module Hjson
 
       def validate(expected)
         current = current_char
-        fail SyntaxError,
-          "Expected %p instead of %p" % [expected, current] if expected && expected != current
+
+        if expected && expected != current
+          fail SyntaxError.new(self, ("Expected %p instead of %p" % [expected, current]))
+        end
       end
 
       def halt(data = nil)

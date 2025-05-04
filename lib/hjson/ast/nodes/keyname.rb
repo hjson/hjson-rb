@@ -15,17 +15,17 @@ module Hjson
       parser do
         until eos?
           if colon?
-            fail SyntaxError if payload.empty?
+            fail SyntaxError.new(self) if payload.empty?
             if positive?(space) && space != payload.length
               buffer.pos = start + space
-              fail SyntaxError
+              fail SyntaxError.new(self)
             end
             halt(payload)
           elsif char <= ' '
-            fail SyntaxError if eos?
+            fail SyntaxError.new(self) if eos?
             self.space = payload.length if negative?(space)
           elsif punctuator?
-            fail SyntaxError
+            fail SyntaxError.new(self)
           else
             payload << char
           end

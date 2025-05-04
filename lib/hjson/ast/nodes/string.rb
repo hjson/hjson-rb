@@ -20,7 +20,7 @@ module Hjson
 
       declare :payload, ''
 
-      parser { fail SyntaxError unless double_quote? }
+      parser { fail SyntaxError.new(self) unless double_quote? }
       parser do
         while read
           halt(read && payload) if double_quote?
@@ -48,7 +48,7 @@ module Hjson
       def read_unicode
         uffff = 4.times.reduce(0) do |i, _|
           read
-          fail SyntaxError unless hex?
+          fail SyntaxError.new(self) unless hex?
           hex = char.to_i(16)
           break if hex.infinite?
           i * 16 + hex
